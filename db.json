@@ -1,0 +1,37 @@
+{
+  "tasks": [
+    {
+      "text": "s",
+      "day": "5:30pm",
+      "reminder": false,
+      "stateH": "added",
+      "addedMan": true,
+      "id": 6
+    },
+    {
+      "text": "asdf",
+      "day": "3:30pm",
+      "reminder": true,
+      "stateH": "added",
+      "addedMan": false,
+      "id": 9
+    },
+    {
+      "text": "asdf",
+      "day": "4:30pm",
+      "reminder": true,
+      "stateH": "added",
+      "addedMan": false,
+      "id": 8
+    },
+    {
+      "text": "df",
+      "day": "5:30pm",
+      "reminder": false,
+      "stateH": "added",
+      "addedMan": false,
+      "id": 7
+    }
+  ],
+  "justDid": []
+}
