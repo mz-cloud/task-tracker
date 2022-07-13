@@ -5,7 +5,8 @@ const AddTask = ({ onAdd }) => {
   const [day, setDay] = useState('')
   const [reminder, setReminder] = useState(false)
   const [important, setImportant] = useState(false)
-
+  const [stateH, setStateH] = useState('added')
+    const [addedMan, setAddedMan] = useState(false)
   const onSubmit = (e) => {
     e.preventDefault()
 
@@ -14,12 +15,14 @@ const AddTask = ({ onAdd }) => {
       return
     }
 
-    onAdd({ text, day, reminder, important })
+    onAdd({ text, day, reminder, important, stateH, addedMan})
 
     setText('')
     setDay('')
     setReminder(false)
     setImportant(false)
+    setStateH('added')
+    setAddedMan(false)
   }
 
   return (
@@ -61,7 +64,8 @@ const AddTask = ({ onAdd }) => {
         />
       </div>
 
-      <input type='submit' value='Save Task' className='btn btn-block' />
+      <input type='submit' value='Save Task' className='btn btn-block' onClick={(e) => 
+        setAddedMan(true)} />
     </form>
   )
 }

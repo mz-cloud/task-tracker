@@ -5,10 +5,12 @@ import Footer from './components/Footer'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 import About from './components/About'
+import Undo from './components/Undo'
 
 const App = () => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [tasks, setTasks] = useState([])
+  const [undos, setUndos] = useState([])
 
   useEffect(() => {
     const getTasks = async () => {
@@ -17,8 +19,25 @@ const App = () => {
     }
 
     getTasks()
-  }, [])
 
+    const getUndos=async () => {
+      const undosFromServer = await fetchJustHaps()
+      setUndos(undosFromServer)
+    }
+
+    getUndos()
+  }, [])
+  //fetch justHaps
+  const fetchJustHaps = async() => {
+    const res = await fetch('http://localhost:5000/justDid')
+    const data = await res.json()
+    return data
+  }
+  const fetchJustHap = async(id) => {
+    const res = await fetch(`https://localhost:5000/justDid${id}`)
+    const data = await res.json()
+    return data
+  }
   // Fetch Tasks
   const fetchTasks = async () => {
     const res = await fetch('http://localhost:5000/tasks')
@@ -34,7 +53,29 @@ const App = () => {
 
     return data
   }
-
+  //Undo
+  const unDo = async () => {
+    const res = await fetch('http://localhost:5000/justDid')
+    const data = await res.json()
+    if (data.length > 0) {
+    console.log(data[data.length-1].id)
+    let itWent = false
+    if (data[data.length-1].stateH=="added") {
+      data[data.length-1].addedMan = false
+      deleteTask(data[data.length-1].id)
+      itWent = true
+    } else if (data[data.length-1].stateH=="deleted") {
+      data[data.length-1].addedMan = false
+      addTask(data[data.length-1])
+      itWent = true
+    }
+    if (itWent) {
+      const res2 = await fetch(`http://localhost:5000/justDid/${data[data.length-1].id}`, {
+        method: 'DELETE',
+      })
+    }
+  }
+  }
   // Add Task
   const addTask = async (task) => {
     const res = await fetch('http://localhost:5000/tasks', {
@@ -46,12 +87,30 @@ const App = () => {
     })
 
     const data = await res.json()
-
+    if (task.addedMan) {
+      const res2 = await fetch('http://localhost:5000/justDid', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+    }
     setTasks([...tasks, data])
   }
 
   // Delete Task
   const deleteTask = async (id) => {
+    const res3 = await fetch(`http://localhost:5000/tasks/${id}`)
+    let data3 = await res3.json()
+    data3.stateH="deleted"
+    const res2 = await fetch('http://localhost:5000/justDid', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(data3)
+    })
     const res = await fetch(`http://localhost:5000/tasks/${id}`, {
       method: 'DELETE',
     })
@@ -114,6 +173,7 @@ const App = () => {
                 ) : (
                   'No Tasks To Show'
                 )}
+                <Undo onUndo={unDo} />
               </>
             }
           />
