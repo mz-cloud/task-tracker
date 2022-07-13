@@ -1,10 +1,11 @@
 import { Box, Nav } from "grommet";
 import { normalizeColor } from "grommet/utils";
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { RouteLinks } from "./data";
+import { RouteLinks, RouteNames } from "./data";
 
-const NavLink = styled.a`
+const StyledLink = styled(Link)`
 	cursor: pointer;
 	text-decoration: none;
 	position: relative;
@@ -27,6 +28,15 @@ const NavLink = styled.a`
 	}
 `;
 
+const NavLink = (props) => {
+	const { to, children } = props;
+	return (
+		<StyledLink key={props.id} to={to} replace>
+			{children}
+		</StyledLink>
+	);
+};
+
 const Navbar = () => {
 	return (
 		<Nav
@@ -37,8 +47,8 @@ const Navbar = () => {
 		>
 			<Box>Task Manager</Box>
 			<Box margin={{ horizontal: "auto" }} height={0} />
-			{RouteLinks.map((link, index) => (
-				<NavLink key={index} href={`/${link.toLowerCase()}`} focusIndicator={false}>
+			{RouteNames.map((link, index) => (
+				<NavLink key={index} to={RouteLinks[index]}>
 					{link}
 				</NavLink>
 			))}

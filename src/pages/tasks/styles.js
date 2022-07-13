@@ -1,5 +1,5 @@
 import { Box, Card, Page, Text } from "grommet";
-import { FormClose, Notification } from "grommet-icons";
+import { Clear, FormClose, Notification } from "grommet-icons";
 import { normalizeColor } from "grommet/utils";
 import styled from "styled-components";
 
@@ -62,5 +62,13 @@ export const StyledTaskBox = styled(Box)`
 export const StyledTaskWrapper = styled(Box)`
 	${StyledTaskBox}:not(:last-child) {
 		margin-bottom: 5px;
+	}
+`;
+export const StyledClearTasks = styled(Clear)`
+	cursor: pointer;
+	margin-right: 5px;
+	:hover {
+		transition: stroke 0.1s linear;
+		stroke: ${({ theme }) => normalizeColor("status-critical", theme)};
 	}
 `;

@@ -15,9 +15,10 @@ import {
 import { Contract, Expand } from "grommet-icons";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, removeTask } from "../../state/store";
+import { addTask, clearTasks, removeTask } from "../../state/store";
 import {
 	StyledCard,
+	StyledClearTasks,
 	StyledIconsWrapper,
 	StyledPage,
 	StyledShowMore,
@@ -66,10 +67,12 @@ const TaskEntry = (props) => {
 
 const CurrentTasks = () => {
 	const tasks = useSelector((state) => state.tasks);
+	const dispatch = useDispatch();
 	return (
 		<div>
 			<CardHeader>
 				<Heading level={3}>Current Tasks</Heading>
+				<StyledClearTasks onClick={() => dispatch(clearTasks())} />
 			</CardHeader>
 			<CardBody>
 				<StyledTaskWrapper>
