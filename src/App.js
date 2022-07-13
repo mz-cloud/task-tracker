@@ -1,12 +1,13 @@
-import { Box, Header } from "grommet";
 import React from "react";
+import Navbar from "./components/navbar";
+import TasksPage from "./pages/tasks";
 
 const App = () => {
 	return (
-		<Header background="brand" sticky="scrollUp">
-			<Box>F</Box>
-			<Box>E</Box>
-		</Header>
+		<div>
+			<Navbar />
+			<TasksPage />
+		</div>
 	);
 };
 

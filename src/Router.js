@@ -1,23 +1,23 @@
 import { grommet, Grommet } from "grommet";
 import React from "react";
+import { Provider } from "react-redux";
 import { createGlobalStyle } from "styled-components";
+import AppStore from "./state/store";
 
-const GlobalStyle = createGlobalStyle`
-	html, body {
+const GlobalStyles = createGlobalStyle`
+	html,
+	body {
 		padding: 0;
 		margin: 0;
-		font-family: 'Roboto', sans-serif;
-	}
-	* {
-	box-sizing: border-box;
+		font-family: "Roboto", sans-serif;
 	}
 `;
 
 const Router = (props) => {
 	return (
 		<Grommet theme={grommet}>
-			<GlobalStyle />
-			{props.children}
+			<GlobalStyles />
+			<Provider store={AppStore}>{props.children}</Provider>
 		</Grommet>
 	);
 };
