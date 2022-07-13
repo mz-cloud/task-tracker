@@ -10,7 +10,7 @@ const Task = ({ task, onDelete, onToggle, onImportant }) => {
 					<FaTimes style={{ color: "red", cursor: "pointer" }} onClick={() => onDelete(task.id)} />
 				</h3>
 				<p>
-					{task.day}
+					{task.dateStr} at {task.timeStr}
 					<FaStar style={{ color: "gold" }} onClick={() => onImportant(task.id)} />
 				</p>
 			</div>

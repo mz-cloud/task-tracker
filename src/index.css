@@ -116,6 +116,10 @@ body {
   height: 20px;
 }
 
+.day-time-picker {
+  margin: 5px;
+}
+
 footer {
   margin-top: 30px;
   text-align: center;
