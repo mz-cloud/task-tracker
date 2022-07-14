@@ -1,14 +1,11 @@
-import Name from './Name'
-
-const Names = ({ names }) => {
+const Name = ({ name }) => {
   return (
-    <>
-      {names.map((name) => (
-        <Name name={name} />,
-        console.log(name)
-      ))}
-    </>
+    <div>
+      <h3>
+        {name}{' '}
+      </h3> 
+    </div>
   )
 }
 
-export default Names
+export default Name
