@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Tasks from "./components/Tasks";
 import Undo from "./components/Undo";
+import Completed from './components/Completed'
 
 const App = () => {
 	const [showAddTask, setShowAddTask] = useState(false);
@@ -117,12 +118,26 @@ const App = () => {
 			},
 			body: JSON.stringify(data3),
 		});
+		const taskToSend = await fetchTask(id)
+    		finishTask(taskToSend)
 
 		const res = await fetch(`http://localhost:5000/tasks/${id}`, {
 			method: "DELETE",
 		});
 		res.status === 200 ? setTasks(tasks.filter((task) => task.id !== id)) : alert("Error Deleting This Task");
 	};
+	const finishTask = async (task) => {
+    	const newTask = task
+    	newTask.id = Math.floor(Math.random() * 10000) + 1
+    	const res = await fetch('http://localhost:5001/names', {
+      	method: 'POST',
+      	headers: {
+        	'Content-type': 'application/json',
+      	},
+     	body: JSON.stringify(newTask),
+    	})
+
+  	}
 
 	//Set Important
 	const setImportant = (id) => {
@@ -172,6 +187,7 @@ const App = () => {
 						}
 					/>
 					<Route path="/about" element={<About />} />
+					<Route path='/completed' element={<Completed />} />
 				</Routes>
 				<Footer />
 			</div>
