@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const savedTasks = JSON.parse(document.cookie);
+const savedTasks = document.cookie ? JSON.parse(document.cookie).tasks : [];
 
 const slice = createSlice({
 	name: "counter",
-	initialState: savedTasks ? savedTasks.tasks : [],
+	initialState: savedTasks,
 	reducers: {
 		addTask: (state, action) => {
 			state.push(action.payload);

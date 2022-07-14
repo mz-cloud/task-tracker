@@ -10,7 +10,7 @@ import {
 	Grid,
 	Heading,
 	TextArea,
-	TextInput,
+	TextInput
 } from "grommet";
 import { Contract, Expand } from "grommet-icons";
 import React, { useState } from "react";
@@ -28,7 +28,7 @@ import {
 	StyledTaskReminderEnabled,
 	StyledTaskRemove,
 	StyledTaskTitle,
-	StyledTaskWrapper,
+	StyledTaskWrapper
 } from "./styles";
 
 const TaskEntry = (props) => {
